@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './App.css'
+import axios from 'axios';
 
 function App() {
-  const [formData, setFormData] = useState ({
+  //URl
+  const API_URL = process.env.REACT_APP_API_URL
+  const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
@@ -96,12 +99,30 @@ function App() {
   };
   console.log(inputFile);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     formData.residentialAddress = residentialAddress;
     formData.permanentAddress = permanentAddress;
     // Handle form submission and verification
     console.log(formData);
+    console.log(API_URL);
+    await axios.post(API_URL + 'upload-document', formData, {
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        Authorization: "1",
+      },
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          alert("Data added")
+        } else {
+          alert("Data not added")
+        }
+      })
+      .catch((error) => {
+        alert("Data not added")
+        console.log(error)
+      })
   };
 
   return (
@@ -228,7 +249,7 @@ function App() {
               Upload Documents
             </div>
           </div>
-          {inputFile.map((val, index) => (
+          {/* {inputFile.map((val, index) => (
             <>
               <div className='col-lg-3'>
                 <label className="form-label">File Name<span className='text-danger mt-1'>*</span></label>
@@ -264,8 +285,7 @@ function App() {
               </div>
             </>
           ))
-
-          }
+          } */}
         </div>
         <div className='row'>
           <div className='col-lg-12 d-flex justify-content-center'>
