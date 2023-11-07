@@ -97,15 +97,12 @@ function App() {
     const updatedFields = inputFile.filter((field) => field.id !== id);
     setInputFile(updatedFields);
   };
-  console.log(inputFile);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     formData.residentialAddress = residentialAddress;
     formData.permanentAddress = permanentAddress;
-    // Handle form submission and verification
-    console.log(formData);
-    console.log(API_URL);
+    console.log("formData", formData);
     await axios.post(API_URL + 'upload-document', formData, {
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
@@ -136,8 +133,7 @@ function App() {
         <div className='row'>
           <div className='col-lg-6 fw-bold mb-3'>
             <label className="form-label"> First Name<span className='text-danger mt-1'>*</span></label>
-            <input
-              className="form-control" type="text" name="firstName" placeholder='Enter your first name here..'
+            <input className="form-control" type="text" name="firstName" placeholder='Enter your first name here..'
               value={formData.firstName}
               onChange={handleChange}
               required
@@ -145,8 +141,7 @@ function App() {
           </div>
           <div className='col-lg-6 fw-bold mb-3'>
             <label className="form-label"> Last Name<span className='text-danger mt-1'>*</span></label>
-            <input
-              className="form-control" type="text" placeholder='Enter your last name here..'
+            <input className="form-control" type="text" placeholder='Enter your last name here..'
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
@@ -157,8 +152,7 @@ function App() {
         <div className='row'>
           <div className='col-lg-6 fw-bold mb-3'>
             <label className="form-label">E-mail<span className='text-danger mt-1'>*</span></label>
-            <input
-              className="form-control" type="email" placeholder='ex: myname@example.com'
+            <input className="form-control" type="email" placeholder='ex: myname@example.com'
               name="email"
               value={formData.email}
               onChange={handleChange}
@@ -167,8 +161,7 @@ function App() {
           </div>
           <div className='col-lg-6 fw-bold mb-3'>
             <label className="form-label">Date of Birth<span className='text-danger mt-1'>*</span></label>
-            <input
-              className="form-control" type="date" name="dateOfBirth" placeholder='Date of Birth'
+            <input className="form-control" type="date" name="dateOfBirth" placeholder='Date of Birth'
               value={formData.dateOfBirth}
               onChange={handleChange}
               required
@@ -183,10 +176,7 @@ function App() {
           </div>
           <div className='col-lg-6 mb-3'>
             <label className="form-label">Street 1<span className='text-danger mt-1'>*</span></label>
-            <input
-              className="form-control"
-              type="text"
-              name="street1"
+            <input className="form-control" type="text" name="street1"
               value={residentialAddress.street1}
               onChange={(e) => setResidentialAddress({ ...residentialAddress, street1: e.target.value })}
               required
@@ -194,10 +184,7 @@ function App() {
           </div>
           <div className='col-lg-6 mb-3'>
             <label className="form-label">Street 2<span className='text-danger mt-1'>*</span></label>
-            <input
-              className="form-control"
-              type="text"
-              name="street2"
+            <input className="form-control" type="text" name="street2"
               value={residentialAddress.street2}
               onChange={(e) => setResidentialAddress({ ...residentialAddress, street2: e.target.value })}
               required
@@ -206,9 +193,7 @@ function App() {
         </div>
         <div className='row mb-2'>
           <div className='col-lg-12 fw-bold'>
-            <input
-              type="checkbox"
-              name="sameAsResidential"
+            <input type="checkbox" name="sameAsResidential"
               checked={formData.sameAsResidential}
               onChange={handleCheckboxChange}
             />
@@ -223,10 +208,7 @@ function App() {
           </div>
           <div className='col-lg-6 mb-3'>
             <label className="form-label">Street 1</label>
-            <input
-              className="form-control"
-              type="text"
-              name="street1"
+            <input className="form-control" type="text" name="street1"
               value={permanentAddress.street1}
               onChange={(e) => setPermanentAddress({ ...permanentAddress, street1: e.target.value })}
               required
@@ -234,10 +216,7 @@ function App() {
           </div>
           <div className='col-lg-6 mb-3'>
             <label className="form-label">Street 2</label>
-            <input
-              className="form-control"
-              type="text"
-              name=".street2"
+            <input className="form-control" type="text" name=".street2"
               value={permanentAddress.street2}
               onChange={(e) => setPermanentAddress({ ...permanentAddress, street2: e.target.value })}
             />
@@ -296,5 +275,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
